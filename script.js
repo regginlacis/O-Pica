@@ -1,3 +1,29 @@
+// ============================================
+// TĒMAS PĀRSLĒGŠANA - LIGHT/DARK THEME
+// ============================================
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-switch');
+    
+    // Ielādē saglabāto tēmu
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeToggle.checked = false;  // tumšā tēma = checkbox unchecked
+    }
+    
+    // Izmaina tēmu, kad akna uz pogas
+    themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+            // Gaišā tēma (light)
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            // Tumšā tēma (dark)
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+});
 // Picas izvēlnes dati
 const pizzaMenu = [
     { id: 1, name: "Margarita", emoji: "🍕", description: "Svaiga mozarella, tomāti, baziliks", price: 12.99 },
@@ -44,8 +70,7 @@ function displayPizzas() {
             </div>
         `;
         pizzaList.appendChild(pizzaCard);
-    });
-}
+
 
 function addToCart(pizzaId) {
     const pizza = pizzaMenu.find(p => p.id === pizzaId);

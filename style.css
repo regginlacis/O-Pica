@@ -1,13 +1,17 @@
-/* Theme Switch Toggle */
+/* ============================================
+   THEME SWITCHER POGA
+   ============================================ */
 .theme-switch-wrapper {
     position: fixed;
-    top: 24px;
-    right: 24px;
+    top: 20px;
+    right: 20px;
     z-index: 2000;
 }
+
 .theme-switch-input {
     display: none;
 }
+
 .theme-switch-label {
     display: flex;
     align-items: center;
@@ -17,25 +21,28 @@
     border-radius: 32px;
     position: relative;
     cursor: pointer;
-    transition: background 0.3s;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
+
 .theme-switch-label .theme-switch-icon {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.2em;
-    z-index: 2;
-    transition: color 0.3s;
+    font-size: 1.3em;
+    transition: opacity 0.3s ease;
 }
+
 .theme-switch-label .sun {
-    left: 12px;
-    color: #ffd700;
+    left: 10px;
+    opacity: 0;
 }
+
 .theme-switch-label .moon {
-    right: 12px;
-    color: #bbb;
+    right: 10px;
+    opacity: 1;
 }
+
 .theme-switch-slider {
     position: absolute;
     left: 4px;
@@ -44,34 +51,95 @@
     height: 24px;
     background: #fff;
     border-radius: 50%;
-    transition: left 0.3s, background 0.3s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+/* Kad ir checked (gaisā) */
 .theme-switch-input:checked + .theme-switch-label {
-    background: #fff;
+    background: #f0f0f0;
 }
+
 .theme-switch-input:checked + .theme-switch-label .sun {
-    color: #bbb;
+    opacity: 1;
 }
+
 .theme-switch-input:checked + .theme-switch-label .moon {
-    color: #0057ff;
+    opacity: 0;
 }
+
 .theme-switch-input:checked + .theme-switch-label .theme-switch-slider {
     left: 42px;
-    background: #0057ff;
+    background: #ffd700;
 }
-* {
+
+/* ============================================
+   GAIŠĀ TĒMA (Light Theme) - DEFAULT
+   ============================================ */
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
     font-family: 'Inter', 'Segoe UI', sans-serif;
     line-height: 1.6;
+    background-color: #f5f5f5;
     color: #1a1a1a;
-    background-color: #0f0f0f;
+    transition: background 0.3s, color 0.3s;
     overflow-x: hidden;
+}
+
+header {
+    background: #fff;
+    color: #1a1a1a;
+    border-bottom: 3px solid #ff4757;
+    padding: 50px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.nav-btn {
+    color: #ff4757;
+    border-color: #ff4757;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: #ff4757;
+    color: #fff;
+}
+
+/* ============================================
+   TUMŠĀ TĒMA (Dark Theme)
+   ============================================ */
+body.dark-theme {
+    background-color: #0f0f0f;
+    color: #f5f5f5;
+}
+
+body.dark-theme header {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+body.dark-theme .navbar {
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
+}
+
+body.dark-theme .nav-btn {
+    color: #fff;
+    border-color: #ff4757;
+}
+
+body.dark-theme .nav-btn:hover {
+    background: #ff4757;
+    color: #fff;
 }
 
 .container {
@@ -82,8 +150,6 @@ body {
 
 /* Header */
 header {
-    background: #1a1a1a;
-    color: white;
     padding: 50px 0;
     text-align: center;
     border-bottom: 3px solid #ff4757;
@@ -127,9 +193,7 @@ header p {
 
 /* Navigation */
 .navbar {
-    background-color: #1a1a1a;
     padding: 20px 0;
-    border-bottom: 1px solid #333;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -144,7 +208,6 @@ header p {
 .nav-btn {
     padding: 10px 24px;
     background-color: transparent;
-    color: #fff;
     border: 2px solid #ff4757;
     border-radius: 50px;
     cursor: pointer;
@@ -154,7 +217,6 @@ header p {
 }
 
 .nav-btn:hover {
-    background-color: #ff4757;
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
 }
