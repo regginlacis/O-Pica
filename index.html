@@ -18,12 +18,9 @@
         <div class="container">
             <!-- Theme Switch Button -->
             <div class="theme-switch-wrapper-nav">
-                <input type="checkbox" id="theme-switch" class="theme-switch-input" onchange="toggleTheme()" />
-                <label for="theme-switch" class="theme-switch-label">
-                    <span class="theme-switch-icon sun">☀️</span>
-                    <span class="theme-switch-slider"></span>
-                    <span class="theme-switch-icon moon">🌙</span>
-                </label>
+                <button class="theme-btn" onclick="setTheme('light')" title="Gaišā tēma">☀️</button>
+                <button class="theme-btn" onclick="setTheme('white')" title="Balta tēma">⚪</button>
+                <button class="theme-btn" onclick="setTheme('dark')" title="Tumšā tēma">🌙</button>
             </div>
             
             <button class="nav-btn" onclick="showMenu()">Izvēlne</button>

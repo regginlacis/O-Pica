@@ -1,34 +1,26 @@
 // ============================================
-// TĒMAS PĀRSLĒGŠANA - LIGHT/DARK THEME
+// TĒMAS PĀRSLĒGŠANA - 3 TĒMAS
+// Light (gaišā), White (balta), Dark (tumšā)
 // ============================================
 
-function toggleTheme() {
-    const checkbox = document.getElementById('theme-switch');
+function setTheme(theme) {
     const body = document.body;
     
-    if (checkbox.checked) {
-        // Gaišā tēma
-        body.classList.remove('dark-theme');
-        localStorage.setItem('theme', 'light');
-    } else {
-        // Tumšā tēma
-        body.classList.add('dark-theme');
-        localStorage.setItem('theme', 'dark');
-    }
+    // Noņem visas tēmas
+    body.classList.remove('light-theme', 'white-theme', 'dark-theme');
+    
+    // Pievieno jauno tēmu
+    body.classList.add(theme + '-theme');
+    
+    // Saglabā localStorage
+    localStorage.setItem('theme', theme);
+    console.log('Mainīta tema uz: ' + theme);
 }
 
 // Ielādē tēmu sākumā
 document.addEventListener('DOMContentLoaded', function() {
-    const checkbox = document.getElementById('theme-switch');
     const savedTheme = localStorage.getItem('theme') || 'light';
-    
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        checkbox.checked = false;
-    } else {
-        document.body.classList.remove('dark-theme');
-        checkbox.checked = true;
-    }
+    setTheme(savedTheme);
 });
 
 
@@ -484,32 +476,6 @@ function showNotification(message) {
         setTimeout(() => notification.remove(), 400);
     }, 3000);
 }
-
-// Dodaj animation styles
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
 
 // Inializē lapas ielādes laikā
 window.addEventListener("DOMContentLoaded", init);
