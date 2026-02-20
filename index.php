@@ -1,7 +1,9 @@
 <?php
-require_once 'config.php';
+// Datubāzes savienojums (vēlāk)
+// require_once 'config.php';
+session_start();
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html>>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

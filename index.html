@@ -7,15 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Theme Switch Button -->
-    <div class="theme-switch-wrapper">
-        <input type="checkbox" id="theme-switch" class="theme-switch-input" />
-        <label for="theme-switch" class="theme-switch-label">
-            <span class="theme-switch-icon sun">☀️</span>
-            <span class="theme-switch-slider"></span>
-            <span class="theme-switch-icon moon">🌙</span>
-        </label>
-    </div>
     <header>
         <div class="container">
             <h1>🍕 O! Pica</h1>
@@ -25,6 +16,16 @@
 
     <nav class="navbar">
         <div class="container">
+            <!-- Theme Switch Button -->
+            <div class="theme-switch-wrapper-nav">
+                <input type="checkbox" id="theme-switch" class="theme-switch-input" onchange="toggleTheme()" />
+                <label for="theme-switch" class="theme-switch-label">
+                    <span class="theme-switch-icon sun">☀️</span>
+                    <span class="theme-switch-slider"></span>
+                    <span class="theme-switch-icon moon">🌙</span>
+                </label>
+            </div>
+            
             <button class="nav-btn" onclick="showMenu()">Izvēlne</button>
             <button class="nav-btn" onclick="showCart()">🛒 Grozs (<span id="cart-count">0</span>)</button>
             <button class="nav-btn" onclick="showOrders()">📦 Pasūtījumi</button>
