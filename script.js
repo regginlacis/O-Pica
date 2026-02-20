@@ -14,14 +14,24 @@ function setTheme(theme) {
     
     // Saglabā localStorage
     localStorage.setItem('theme', theme);
-    console.log('Mainīta tema uz: ' + theme);
+    console.log('✓ Tema mainīta uz: ' + theme);
 }
 
 // Ielādē tēmu sākumā
-document.addEventListener('DOMContentLoaded', function() {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        console.log('✓ Ielādēta tema: ' + savedTheme);
+        setTheme(savedTheme);
+    });
+} else {
+    // Ja script ir defer, document var jau būt parsed
     const savedTheme = localStorage.getItem('theme') || 'light';
+    console.log('✓ Ielādēta tema (defer): ' + savedTheme);
     setTheme(savedTheme);
-});
+}
+
+console.log('✓ Theme script ielādēts');
 
 
 
