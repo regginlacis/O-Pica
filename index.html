@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍕 O! Pica - Pasūtiet savu mīļoto picu</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
     <header>
@@ -59,6 +58,35 @@
     <footer>
         <p>&copy; 2026 O! Pica. Visas tiesības rezervētas. 🍕</p>
     </footer>
+
+    <script>
+        // ============================================
+        // TĒMAS PĀRSLĒGŠANA - 3 TĒMAS
+        // ============================================
+        
+        function setTheme(theme) {
+            const body = document.body;
+            
+            // Noņem visas tēmas
+            body.classList.remove('light-theme', 'white-theme', 'dark-theme');
+            
+            // Pievieno jauno tēmu
+            body.classList.add(theme + '-theme');
+            
+            // Saglabā localStorage
+            localStorage.setItem('theme', theme);
+            console.log('✓ Tema mainīta uz: ' + theme);
+        }
+        
+        // Ielādē tēmu sākumā
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            console.log('✓ Tema ielādēta: ' + savedTheme);
+        });
+        
+        console.log('✓ Theme system ielādēts');
+    </script>
 
 </body>
 </html>
