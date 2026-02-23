@@ -19,14 +19,12 @@
             <!-- Theme Switch Button -->
             <div class="theme-switch-wrapper-nav">
                 <button class="theme-btn" onclick="setTheme('light')" title="Gaišā tēma">☀️</button>
-                <button class="theme-btn" onclick="setTheme('white')" title="Balta tēma">⚪</button>
                 <button class="theme-btn" onclick="setTheme('dark')" title="Tumšā tēma">🌙</button>
             </div>
             
             <button class="nav-btn" onclick="showMenu()">Izvēlne</button>
             <button class="nav-btn" onclick="showCart()">🛒 Grozs (<span id="cart-count">0</span>)</button>
             <button class="nav-btn" onclick="showOrders()">📦 Pasūtījumi</button>
-            <a href="admin.php" class="nav-btn admin-btn" style="text-decoration: none;">⚙️ Admin</a>
         </div>
     </nav>
 
@@ -61,14 +59,14 @@
 
     <script>
         // ============================================
-        // TĒMAS PĀRSLĒGŠANA - 3 TĒMAS
+        // TĒMAS PĀRSLĒGŠANA - 2 TĒMAS
         // ============================================
         
         function setTheme(theme) {
             const body = document.body;
             
             // Noņem visas tēmas
-            body.classList.remove('light-theme', 'white-theme', 'dark-theme');
+            body.classList.remove('light-theme', 'dark-theme');
             
             // Pievieno jauno tēmu
             body.classList.add(theme + '-theme');
