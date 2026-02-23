@@ -1,13 +1,13 @@
 // ============================================
-// TĒMAS PĀRSLĒGŠANA - 3 TĒMAS
-// Light (gaišā), White (balta), Dark (tumšā)
+// TĒMAS PĀRSLĒGŠANA - 2 TĒMAS
+// Light (gaišā), Dark (tumšā)
 // ============================================
 
 function setTheme(theme) {
     const body = document.body;
     
     // Noņem visas tēmas
-    body.classList.remove('light-theme', 'white-theme', 'dark-theme');
+    body.classList.remove('light-theme', 'dark-theme');
     
     // Pievieno jauno tēmu
     body.classList.add(theme + '-theme');
@@ -82,7 +82,8 @@ function displayPizzas() {
             </div>
         `;
         pizzaList.appendChild(pizzaCard);
-
+    });
+}
 
 function addToCart(pizzaId) {
     const pizza = pizzaMenu.find(p => p.id === pizzaId);
