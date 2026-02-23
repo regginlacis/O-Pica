@@ -1,25 +1,10 @@
-// Apstrādā atceltos pasūtījumus no klienta puses (LV)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true);
-    if (isset($input['darbība']) && $input['darbība'] === 'atcelt') {
-        $order_id = isset($input['pasutijumaId']) ? $input['pasutijumaId'] : '';
-        if ($order_id) {
-            // Atzīmē pasūtījumu kā atceltu datubāzē
-            $stmt = $conn->prepare("UPDATE orders SET status = 'atcelts' WHERE order_id = ?");
-            $stmt->bind_param("s", $order_id);
-            $stmt->execute();
-            $stmt->close();
-            echo json_encode(['success' => true, 'message' => 'Pasūtījums atcelts veiksmīgi.']);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Nav norādīts pasūtījuma ID.']);
-        }
-        exit();
-    }
-}
 <?php
-// Admin panelis - tikai server-side
+// Admin panelis
 
-require_once 'config.php';
+session_start();
+
+// Admin parole
+define('ADMIN_PASSWORD', 'parole123');
 
 // Login loģika
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
@@ -138,6 +123,9 @@ if (isset($_GET['logout'])) {
 // Pārbaudiet vai admin ir izsaukts
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 
+// Pasūtījumu fails
+$orders_file = 'data/orders.json';
+
 // Marķēt kā piegādātu un dzēst
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -146,17 +134,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $order_id = isset($_POST['order_id']) ? $_POST['order_id'] : '';
         
         if ($order_id) {
-            // Dzēst pasūtījuma vienumus
-            $stmt = $conn->prepare("DELETE FROM order_items WHERE order_id = ?");
-            $stmt->bind_param("s", $order_id);
-            $stmt->execute();
-            $stmt->close();
+            // Ielādē pasūtījumus no JSON faila
+            $orders = [];
+            if (file_exists($orders_file)) {
+                $orders = json_decode(file_get_contents($orders_file), true);
+            }
             
-            // Dzēst pasūtījumu
-            $stmt = $conn->prepare("DELETE FROM orders WHERE order_id = ?");
-            $stmt->bind_param("s", $order_id);
-            $stmt->execute();
-            $stmt->close();
+            // Dzēš pasūtījumu
+            $orders = array_filter($orders, function($o) use ($order_id) {
+                return $o['id'] !== $order_id;
+            });
+            
+            // Saglabā atpakaļ
+            if (!is_dir('data')) {
+                mkdir('data', 0755);
+            }
+            file_put_contents($orders_file, json_encode(array_values($orders)));
             
             $success_message = "Pasūtījums piegādāts un dzēsts no sistēmas!";
         }
@@ -169,48 +162,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 // Notīrīt visu datubāzi
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'clear') {
-    $conn->query("DELETE FROM order_items");
-    $conn->query("DELETE FROM orders");
+    if (!is_dir('data')) {
+        mkdir('data', 0755);
+    }
+    file_put_contents($orders_file, json_encode([]));
     header("Location: admin.php");
     exit();
 }
 
 // Tīras GET notīrīšanas darbības atbalsts (no formas)
 if ($action === 'clear' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    $conn->query("DELETE FROM order_items");
-    $conn->query("DELETE FROM orders");
+    if (!is_dir('data')) {
+        mkdir('data', 0755);
+    }
+    file_put_contents($orders_file, json_encode([]));
     header("Location: admin.php");
     exit();
 }
 
-// Iegūt visus pasūtījumus
+// Iegūt visus pasūtījumus no JSON faila
 $orders = [];
-$sql = "SELECT o.id, o.order_id, o.total_price, o.timestamp, o.status FROM orders o ORDER BY o.timestamp DESC";
-$result = $conn->query($sql);
-
-if ($result) {
-    while ($row = $result->fetch_assoc()) {
-        $row_id = $row['id'];
-        
-        // Iegūt vienumus
-        $items_sql = "SELECT pizza_name, pizza_emoji, quantity, price FROM order_items WHERE order_id = ?";
-        $items_stmt = $conn->prepare($items_sql);
-        $items_stmt->bind_param("s", $row['order_id']);
-        $items_stmt->execute();
-        $items_result = $items_stmt->get_result();
-        
-        $items = [];
-        while ($item = $items_result->fetch_assoc()) {
-            $items[] = $item;
-        }
-        $items_stmt->close();
-        
-        $row['items'] = $items;
-        $orders[] = $row;
+if (file_exists($orders_file)) {
+    $orders = json_decode(file_get_contents($orders_file), true);
+    if (!is_array($orders)) {
+        $orders = [];
     }
+    // Sortē pēc timestamp descending
+    usort($orders, function($a, $b) {
+        return strtotime($b['timestamp'] ?? '2000-01-01') - strtotime($a['timestamp'] ?? '2000-01-01');
+    });
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -445,7 +426,7 @@ $conn->close();
                 <?php foreach ($orders as $order): ?>
                     <div class="admin-order-card">
                         <div class="admin-order-header">
-                            <span class="order-id">Pasūtījums #<?php echo htmlspecialchars($order['order_id']); ?></span>
+                            <span class="order-id">Pasūtījums #<?php echo htmlspecialchars($order['id']); ?></span>
                             <span class="order-time"><?php echo htmlspecialchars($order['timestamp']); ?></span>
                             <span class="order-status">⏳ Gaida</span>
                         </div>
@@ -453,21 +434,21 @@ $conn->close();
                         <div class="order-items-list">
                             <?php foreach ($order['items'] as $item): ?>
                                 <div class="order-item">
-                                    <?php echo htmlspecialchars($item['pizza_emoji']); ?>
-                                    <?php echo htmlspecialchars($item['pizza_name']); ?>
+                                    <?php echo htmlspecialchars($item['emoji']); ?>
+                                    <?php echo htmlspecialchars($item['name']); ?>
                                     x<?php echo htmlspecialchars($item['quantity']); ?>
-                                    - €<?php echo number_format($item['price'] * $item['quantity'], 2); ?>
+                                    - €<?php echo number_format($item['price'], 2); ?>
                                 </div>
                             <?php endforeach; ?>
                         </div>
                         
                         <div class="order-total">
-                            Kopā: €<?php echo number_format($order['total_price'], 2); ?>
+                            Kopā: €<?php echo number_format($order['total'], 2); ?>
                         </div>
                         
                         <div class="order-actions">
                             <form method="POST" style="display: inline;">
-                                <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['order_id']); ?>">
+                                <input type="hidden" name="order_id" value="<?php echo htmlspecialchars($order['id']); ?>">
                                 <input type="hidden" name="action" value="deliver">
                                 <button type="submit" class="btn-deliver" onclick="return confirm('Atzīmēt šo pasūtījumu kā piegādātu?');">
                                     ✓ Atzīmēt Piegādātu
