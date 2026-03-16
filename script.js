@@ -157,7 +157,7 @@ function displayPizzas() {
             <div class="pizza-info">
                 <div class="pizza-name">${pizza.name}</div>
                 <div class="pizza-description">${pizza.description}</div>
-                <div class="pizza-allergens">[WARNING] ${pizza.allergens}</div>
+                <div class="pizza-allergens">⚠️ ALERGENI: ${pizza.allergens}</div>
                 <div class="pizza-footer">
                     <div class="pizza-price">€${pizza.price.toFixed(2)}</div>
                     <button class="btn-add" onclick="addToCart(${pizza.id})">Pievienot</button>
@@ -644,7 +644,7 @@ let chatState = {
 const aiResponses = {
     'cena': 'Mūsu picas maksā no €7 līdz €11 atkarībā no izmeľa un toppings-iem. Skatiet izvēlni detalizētiem cenas informācijai! 🍕',
     'piegade': 'Piegāde noris 30-45 minūtes. Bezmaksas piegāde pasūtījumiem ar 3 picām! 🚚',
-    'alergeni': 'Mums ir daudz alergēno produktu - Glutēns, Piena produkti, Rieksti, Zivis un citi. Lūdzam informēt mūsu personālu! [WARNING]',
+    'alergeni': 'Mums ir daudz alergēno produktu - Glutēns, Piena produkti, Rieksti, Zivis un citi. Lūdzam informēt mūsu personālu! ⚠️',
     'kontakts': 'Mūsu telefons: 26318083, Tukums. Pieņemam zvanājumus Otr-Sestd 17:00-22:00 [PHONE]',
     'maksasha': 'Mēs pieņemam skaidru naudu, bankas kartes un online maksājumus! [CARD]',
     'minimums': 'Nav minimālā pasūtījuma! Savāksana pie Jauntukuma Mego - bez maksu. 📦',

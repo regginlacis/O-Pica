@@ -117,7 +117,7 @@ $is_logged_in = isset($_SESSION['user_id']);
             </div>
         <?php else: ?>
             <div class="status-box status-orange">
-                WARNING Jūs neesat pierakstīts sistēmā. <a href="login.php" style="color: inherit; font-weight: bold;">Pierakstieties šeit</a>
+                ⚠️ ALERGENI Jūs neesat pierakstīts sistēmā. <a href="login.php" style="color: inherit; font-weight: bold;">Pierakstieties šeit</a>
             </div>
         <?php endif; ?>
         
