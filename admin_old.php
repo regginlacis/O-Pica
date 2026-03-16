@@ -3,7 +3,7 @@ require_once 'config.php';
 require_once 'theme_init.php';
 session_start();
 
-// Simple password authentication
+// Vienkārša paroles autentifikācija
 if (!isset($_SESSION['admin_logged_in'])) {
     if ($_POST['password'] ?? false) {
         if ($_POST['password'] === 'admin123') {
@@ -11,7 +11,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
             header('Location: admin.php');
             exit;
         }
-        $login_error = "ERROR Invalid Password";
+        $login_error = "Kļūda: Nepareiza parole";
     }
     
     // Pierakstīšanās forma
@@ -21,7 +21,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Admin Pieeja</title>
+        <title>Administratora Pieeja</title>
         <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
         <style>
             .login-box {
@@ -33,16 +33,16 @@ if (!isset($_SESSION['admin_logged_in'])) {
                 box-shadow: 0 5px 20px rgba(0,0,0,0.1);
                 border-top: 4px solid #E8360F;
             }
-            .login-box h2 { color: #E8360F; text-align: center; margin-bottom: 30px; }
-            .login-box input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; box-sizing: border-box; }
-            .login-box button { width: 100%; padding: 12px; background: #E8360F; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+            .login-box h2 { color: #E8360F; text-align: center; margin-bottom: 30px; font-size: 24px; }
+            .login-box input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 0px; font-size: 16px; box-sizing: border-box; }
+            .login-box button { width: 100%; padding: 12px; background: #E8360F; color: white; border: none; border-radius: 0px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; }
             .login-box button:hover { background: #ff6b4a; }
             .error { color: #e74c3c; text-align: center; padding: 10px; background: #fadbd8; border-radius: 5px; margin-bottom: 15px; }
         </style>
     </head>
     <body>
         <div class="login-box">
-            <h2>LOCK Admin</h2>
+            <h2>🔐 Administratora Pieeja</h2>
             <?php if (isset($login_error)) echo "<div class='error'>$login_error</div>"; ?>
             <form method="POST">
                 <input type="password" name="password" placeholder="Parole" required autofocus>
@@ -55,18 +55,18 @@ if (!isset($_SESSION['admin_logged_in'])) {
     exit;
 }
 
-// LOGOUT
+// Izlogošanās
 if ($_GET['logout'] ?? false) {
     unset($_SESSION['admin_logged_in']);
     header('Location: index.php');
     exit;
 }
 
-// HANDLE ACTIONS
+// Darbību apstrāde
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
     
-    // Mark order delivered (delete it)
+    // Atzīmē pasūtījumu kā piegādātu (dzēš to)
     if ($action === 'deliver') {
         $order_id = (int)($_POST['order_id'] ?? 0);
         if ($order_id > 0) {
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
-    // Delete customer message
+    // Dzēš klientu ziņu
     if ($action === 'delete_message') {
         $msg_id = (int)($_POST['msg_id'] ?? 0);
         if ($msg_id > 0) {
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// GET ALL ORDERS
+// Iegūst visus pasūtījumus
 $orders = [];
 $result = $conn->query("SELECT o.order_id, o.total_price, o.order_date FROM orders o ORDER BY o.order_date DESC");
 if ($result) {
@@ -103,7 +103,7 @@ if ($result) {
     }
 }
 
-// GET ALL CUSTOMER MESSAGES
+// Iegūst visus klientu ziņojumus
 $messages = [];
 $msg_result = $conn->query("SELECT id, name, email, message, timestamp FROM support_requests ORDER BY timestamp DESC LIMIT 50");
 if ($msg_result) {
@@ -151,18 +151,18 @@ if ($msg_result) {
 <body>
 <div class="admin-container">
     <div class="admin-top">
-        <h1>ADMIN Administrācija</h1>
-        <a href="?logout=1">← Izbeigt</a>
+        <h1>🔐 Administrācija</h1>
+        <a href="?logout=1">← Iziet</a>
     </div>
     
-    <!-- STATISTIKA -->
+    <!-- Statistika -->
     <div class="stats-row">
         <div class="stat-box">
-            <small>ORDERS Kopējie Pasūtījumi</small>
+            <small>📦 Kopējie Pasūtījumi</small>
             <big><?php echo count($orders); ?></big>
         </div>
         <div class="stat-box">
-            <small>REVENUE Kopējie Ieñēmumi</small>
+            <small>💰 Kopējie Ieņēmumi</small>
             <big>€<?php 
                 $total = 0;
                 foreach ($orders as $o) $total += $o['total_price'];
@@ -170,23 +170,23 @@ if ($msg_result) {
             ?></big>
         </div>
         <div class="stat-box">
-            <small>STATS Viduējais Pasūtījums</small>
+            <small>📊 Vidējais Pasūtījums</small>
             <big>€<?php echo count($orders) > 0 ? number_format($total / count($orders), 2) : '0.00'; ?></big>
         </div>
     </div>
     
-    <!-- PASŪTĪJUMI -->
-    <h2 style="color: #E8360F; margin: 40px 0 20px 0;">ORDERS Pasūtījumi</h2>
+    <!-- Pasūtījumi -->
+    <h2 style="color: #E8360F; margin: 40px 0 20px 0;">📦 Pasūtījumi</h2>
     
     <?php if (empty($orders)): ?>
-        <div class="empty-msg">EMPTY Nav pasūtījumu</div>
+        <div class="empty-msg">📭 Nav pasūtījumu</div>
     <?php else: ?>
         <div class="orders-list">
             <?php foreach ($orders as $order): ?>
                 <div class="order-card">
                     <div class="order-header">
                         <div class="order-header-item order-id">#<?php echo $order['order_id']; ?></div>
-                        <div class="order-header-item order-time">DATE <?php echo date('H:i d.m.Y', strtotime($order['order_date'])); ?></div>
+                        <div class="order-header-item order-time">📅 <?php echo date('H:i d.m.Y', strtotime($order['order_date'])); ?></div>
                         <div class="order-header-item" style="font-weight: bold; color: #E8360F;"><?php echo number_format($order['total_price'], 2); ?>€</div>
                     </div>
                     
@@ -195,22 +195,22 @@ if ($msg_result) {
                         $items_result = $conn->query("SELECT p.name, oi.quantity, oi.unit_price FROM order_items oi JOIN pizzas p ON oi.pizza_id = p.pizza_id WHERE oi.order_id = {$order['order_id']}");
                         while ($item = $items_result->fetch_assoc()):
                         ?>
-                            <div class="order-item">PIZZA <?php echo $item['name']; ?> x<?php echo $item['quantity']; ?> = €<?php echo number_format($item['unit_price'] * $item['quantity'], 2); ?></div>
+                            <div class="order-item">🍕 <?php echo $item['name']; ?> x<?php echo $item['quantity']; ?> = €<?php echo number_format($item['unit_price'] * $item['quantity'], 2); ?></div>
                         <?php endwhile; ?>
                     </div>
                     
                     <form method="POST" style="display: inline;">
                         <input type="hidden" name="action" value="deliver">
                         <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
-                        <button type="submit" class="btn-deliver" onclick="return confirm('Atzīmēt kā piegādātu un dzēst?')">OK Piegādāts</button>
+                        <button type="submit" class="btn-deliver" onclick="return confirm('Atzīmēt kā piegādātu un dzēst?')">✓ Piegādāts</button>
                     </form>
                 </div>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
     
-    <!-- POPULĀRĀKĀS PICAS -->
-    <h2 style="color: #E8360F; margin: 40px 0 20px 0;">PIZZA Populārākās Picas</h2>
+    <!-- Populārākās picas -->
+    <h2 style="color: #E8360F; margin: 40px 0 20px 0;">🍕 Populārākās Picas</h2>
     <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
         <?php
         $pizza_result = $conn->query("SELECT p.name, COUNT(oi.order_id) as orders, SUM(oi.quantity) as total_qty FROM order_items oi JOIN pizzas p ON oi.pizza_id = p.pizza_id GROUP BY p.pizza_id ORDER BY orders DESC LIMIT 5");
@@ -218,27 +218,27 @@ if ($msg_result) {
         ?>
             <table style="width: 100%; border-collapse: collapse;">
                 <tr style="border-bottom: 2px solid #ddd;">
-                    <th style="text-align: left; padding: 12px; color: #E8360F;">Pica</th>
-                    <th style="text-align: center; padding: 12px; color: #E8360F;">Pasūtījumi</th>
-                    <th style="text-align: center; padding: 12px; color: #E8360F;">Kopā (gab.)</th>
+                    <th style="text-align: left; padding: 12px; color: #E8360F;">🍕 Pica</th>
+                    <th style="text-align: center; padding: 12px; color: #E8360F;">📦 Pasūtījumi</th>
+                    <th style="text-align: center; padding: 12px; color: #E8360F;">📊 Kopā (gab.)</th>
                 </tr>
                 <?php while ($pizza = $pizza_result->fetch_assoc()): ?>
                     <tr style="border-bottom: 1px solid #eee;">
-                        <td style="padding: 12px;">PIZZA <?php echo $pizza['name']; ?></td>
+                        <td style="padding: 12px;">🍕 <?php echo $pizza['name']; ?></td>
                         <td style="text-align: center; padding: 12px; color: #E8360F; font-weight: bold;"><?php echo $pizza['orders']; ?></td>
                         <td style="text-align: center; padding: 12px; color: #667eea; font-weight: bold;"><?php echo $pizza['total_qty']; ?></td>
                     </tr>
                 <?php endwhile; ?>
             </table>
         <?php else: ?>
-            <p style="text-align: center; color: #999;">Nav datu</p>
+            <p style="text-align: center; color: #999;">📭 Nav datu</p>
         <?php endif; ?>
     </div>
     
-    <!-- KLIENTU ZI AS -->
-    <h2 style="color: #E8360F; margin: 40px 0 20px 0;">MESSAGES Klientu Ziñas</h2>
+    <!-- Klientu ziņas -->
+    <h2 style="color: #E8360F; margin: 40px 0 20px 0;">💬 Klientu Ziņas</h2>
     <div id="supportRequestsContainer">
-        <p style="text-align: center; color: #999;">Nav ziņu</p>
+        <p style="text-align: center; color: #999;">📭 Nav ziņu</p>
     </div>
 </div>
 
@@ -248,7 +248,7 @@ function loadSupportRequests() {
     const container = document.getElementById('supportRequestsContainer');
     
     if (requests.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #999;">Nav ziņu</p>';
+        container.innerHTML = '<p style="text-align: center; color: #999;">📭 Nav ziņu</p>';
         return;
     }
     
@@ -256,11 +256,11 @@ function loadSupportRequests() {
     requests.forEach(request => {
         html += `<div style="background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid #E8360F; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
             <div style="margin-bottom: 10px;">
-                <strong style="color: #333;">USER ${escapeHtml(request.name)}</strong> - EMAIL ${escapeHtml(request.email)}
+                <strong style="color: #333;">👤 ${escapeHtml(request.name)}</strong> - 📧 ${escapeHtml(request.email)}
             </div>
             <div style="color: #666; margin: 10px 0; white-space: pre-wrap;">${escapeHtml(request.message)}</div>
-            <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">TIME ${request.timestamp || 'N/A'}</div>
-            <button onclick="deleteRequest(${request.id})" style="background: #e74c3c; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;">DELETE Dzēst</button>
+            <div style="font-size: 0.9em; color: #999; margin-bottom: 10px;">⏰ ${request.timestamp || 'N/A'}</div>
+            <button onclick="deleteRequest(${request.id})" style="background: #e74c3c; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer;">🗑️ Dzēst</button>
         </div>`;
     });
     
@@ -301,6 +301,7 @@ document.addEventListener('DOMContentLoaded', loadSupportRequests);
         .admin-header h1 {
             color: #E8360F;
             margin-bottom: 10px;
+            font-size: 28px;
         }
         
         .admin-controls {
@@ -481,8 +482,8 @@ document.addEventListener('DOMContentLoaded', loadSupportRequests);
         </div>
         
         <div class="admin-header">
-            <h1>Admin Panelis</h1>
-            <p>Pārvaldiet pasūtījumus un piegādes</p>
+            <h1>🔐 Administrācija</h1>
+            <p>Pārvaldiet pasūtījumus un klientu ziņas</p>
         </div>
         
         <?php if (isset($success_message)): ?>
@@ -494,51 +495,51 @@ document.addEventListener('DOMContentLoaded', loadSupportRequests);
         <div class="admin-controls">
             <a href="admin.php" class="btn-refresh">🔄 Pārlādēt</a>
             
-            <!-- Statistikas Perioda Izvēle -->
+            <!-- Perioda izvēle -->
             <select id="statisticsPeriod" class="period-select" style="padding: 12px 20px; border-radius: 5px; border: 1px solid #ddd; cursor: pointer;">
                 <option value="today">📅 Šodien</option>
                 <option value="week">📊 Šonedēļ</option>
                 <option value="month" selected>📈 Šomēnesi</option>
             </select>
             
-            <!-- CSV Eksporta Poga -->
+            <!-- CSV eksporta poga -->
             <a href="/opica/api_mysql.php?action=export_orders" class="btn-refresh" style="background-color: #27ae60;">📥 Eksportēt CSV</a>
             
             <?php if (!empty($orders)): ?>
                 <form method="GET" style="display: inline;">
                     <input type="hidden" name="action" value="clear">
                     <button type="submit" class="btn-clear" onclick="return confirm('Vai esat pārliecināts? Šo nevar atsaukt!');">
-                        🗑️ Notīrīt Visu
+                        🗑️ Dzēst Visu
                     </button>
                 </form>
             <?php endif; ?>
         </div>
         
-        <!-- DASHBOARD SEKSIJA -->
+        <!-- Kontrol panelis -->
         <div class="dashboard-section" id="dashboardSection" style="margin-bottom: 40px;">
             <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                <!-- Pasūtījumi Widget -->
+                <!-- Pasūtījumi lodziņš -->
                 <div class="stat-widget" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     <div style="font-size: 2.5em; margin-bottom: 10px;">📦</div>
-                    <div style="font-size: 0.9em; opacity: 0.9;">Pasūtījumi</div>
+                    <div style="font-size: 0.9em; opacity: 0.9;">Kopējie Pasūtījumi</div>
                     <div style="font-size: 2.5em; font-weight: bold;" id="orderCount">-</div>
                 </div>
                 
-                <!-- Ieņēmumi Widget -->
+                <!-- Ieņēmumi lodziņš -->
                 <div class="stat-widget" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     <div style="font-size: 2.5em; margin-bottom: 10px;">💰</div>
                     <div style="font-size: 0.9em; opacity: 0.9;">Kopējie Ieņēmumi</div>
                     <div style="font-size: 2.5em; font-weight: bold;" id="totalRevenue">-</div>
                 </div>
                 
-                <!-- Vidējis Pasūtījums Widget -->
+                <!-- Vidējais pasūtījums lodziņš -->
                 <div class="stat-widget" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     <div style="font-size: 2.5em; margin-bottom: 10px;">📊</div>
                     <div style="font-size: 0.9em; opacity: 0.9;">Vidējais Pasūtījums</div>
                     <div style="font-size: 2.5em; font-weight: bold;" id="averageOrder">-</div>
                 </div>
                 
-                <!-- Atsauksmes Widget -->
+                <!-- Vidējie atsauksmes lodziņš -->
                 <div class="stat-widget" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
                     <div style="font-size: 2.5em; margin-bottom: 10px;">⭐</div>
                     <div style="font-size: 0.9em; opacity: 0.9;">Vidējais Reitings</div>
@@ -548,20 +549,20 @@ document.addEventListener('DOMContentLoaded', loadSupportRequests);
             
             <!-- Grafiki -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                <!-- Pasūtījumus pēc Statusa -->
+                <!-- Pasūtījumi pēc statusa -->
                 <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <h3 style="color: #E8360F; margin-bottom: 15px;">📋 Pasūtījumi pēc Statusa</h3>
                     <canvas id="statusChart" style="max-height: 300px;"></canvas>
                 </div>
                 
-                <!-- Maksāšanas Metodes -->
+                <!-- Maksāšanas metodes -->
                 <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <h3 style="color: #E8360F; margin-bottom: 15px;">💳 Maksāšanas Metodes</h3>
                     <canvas id="paymentChart" style="max-height: 300px;"></canvas>
                 </div>
             </div>
             
-            <!-- Top Picas Tabula -->
+            <!-- Populārāko picu tabula -->
             <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                 <h3 style="color: #E8360F; margin-bottom: 15px;">🍕 Populārākās Picas</h3>
                 <table id="topPizzasTable" style="width: 100%; border-collapse: collapse;">
@@ -583,7 +584,7 @@ document.addEventListener('DOMContentLoaded', loadSupportRequests);
         
         <?php if (empty($orders)): ?>
             <div class="empty-orders">
-                <p style="font-size: 48px; margin-bottom: 10px;">📦</p>
+                <p style="font-size: 48px; margin-bottom: 10px;">�</p>
                 <p>Nav neviena pasūtījuma</p>
             </div>
         <?php else: ?>
@@ -639,16 +640,16 @@ document.addEventListener('DOMContentLoaded', loadSupportRequests);
         <?php endif; ?>
     </div>
 
-    <!-- Support Requests Sekcija -->
+    <!-- Klientu palīdzības pieprasījumi sekcija -->
     <div class="admin-container" style="margin-top: 40px; border-top: 2px solid #ddd; padding-top: 30px;">
 
         <h2 style="color: #E8360F; margin-bottom: 20px;">�💬 Klientu Palīdzības Pieprasījumi</h2>
         
-        <p id="noRequestsMessage" style="text-align: center; color: #999;">Vēl nav neviena palīdzības pieprasījuma</p>
+        <p id="noRequestsMessage" style="text-align: center; color: #999;">📭 Vēl nav neviena palīdzības pieprasījuma</p>
         <div id="supportRequestsContainer"></div>
     </div>
 
-    <!-- Chart.js biblioteka -->
+    <!-- Chart.js bibliotēka -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     
     <script>
@@ -919,7 +920,7 @@ document.addEventListener('DOMContentLoaded', loadSupportRequests);
     </script>
     
     <footer>
-        <p>&copy; 2026 O! Pica Admin. Visas tiesības rezervētas. 🍕</p>
+        <p>&copy; 2026 O! Pica. Visas tiesības rezervētas. 🍕</p>
     </footer>
     
     <script>
