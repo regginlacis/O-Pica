@@ -5,8 +5,9 @@
 Programmas veids:      Profesionālā vidējās izglītības programma
 Izglītības programma:  Programmēšana
 Prakses nosaukums:     Mācību prakse
-Prakses vieta:         SIA "NetService", Padures iela 7, Tukums, LV-3101
-Tālr.:                 +371 63306789
+Prakses vieta:         IK "O! Pica", Jauntukuma Mego, Tukums, LV-3101
+Tālr.:                 +371 26318083
+Mājaslapa:             www.opica.lv
 Prakses laiks:         16.02.2026. – 13.03.2026.
 Prakses pārskata iesniegšana: 16.03.2026.
 Prakses aizstāvēšana:  17.03.2026.
@@ -20,7 +21,7 @@ Es, _________________________ (vārds, uzvārds), ar savu parakstu, apliecinu:
 Apliecinu, ka iepazinos ar praktikanta sagatavoto prakses atskaites saturu un atļauju 
 iesniegt to izglītības iestādē pēc prakses norises:
 
-Darba devēja vārds, uzvārds; paraksts: ____________________________________
+IK "O! Pica" vadītājs/vadītāja; paraksts: ____________________________________
 
 Prakses atskaite iesniegta izglītības iestādē: _____________ (datums)
 
@@ -83,21 +84,28 @@ Prakses atskaite iesniegta izglītības iestādē: _____________ (datums)
 
 1.1. Prakses uzņēmuma raksturojums
 
-Uzņēmuma nosaukums:  SIA "NetService"
-Atrašanās vieta:     Padures iela 7, Tukums, LV-3101
-Tālrunis:            +371 63306789
-Mājaslapa:           www.netservice.lv
-Dibināts:            2012. gadā
+Uzņēmuma nosaukums:  IK "O! Pica"
+Atrašanās vieta:     Jauntukuma Mego stāvlaukums, Tukums, LV-3101
+Tālrunis:            +371 26318083
+Mājaslapa:           www.opica.lv
+Dibināts:            2015. gadā
 
 Uzņēmuma raksturojums:
-SIA "NetService" ir IT uzņēmums, kas specializējas programmatūras izstrādē un 
-tīkla risinājumos. Uzņēmums strādā ar dažādiem klientiem no maziem uzņēmumiem 
-līdz lielām organizācijām. Viņu darbinieki izstrādā mājas lapas, e-komercijas 
-sistēmas un pēc pasūtījuma risinājumus. Uzņēmums skaita apmēram 25 darbiniekus.
+IK "O! Pica" ir picu restorāns, kas specializējas uz picu piegādi un savākšanu 
+Tukumā un apkārtējās teritorijās. Uzņēmums darbojas otrdienā līdz sestdienai 
+no 17:00 līdz 22:00. Piedāvājas dažādas picas ar dažādām pildījumiem, kā arī 
+piedāvājas picu pielāgošanu pēc klienta vēlmes.
+
+Piegādes zonas:
+- Tukuma pilsēta - 2.00€
+- Jauntukums un Durbe (šaipus sliedēm) - 1.00€
+- LLT, Veļķi - 2.50€
+- Savākšana Jauntukuma Mego stāvlaukumā - BEZ MAKSAS
+- 3 vai vairāk picas - piegāde bez maksas
 
 Prakses laikā mans uzdevums bija izstrādāt picu pasūtījuma pārvaldības sistēmu 
-"O! Pica", kas palīdzētu picu restorānam pārvaldīt pasūtījumus un klientu 
-komunikāciju.
+"O! Pica", kas palīdzētu picu restorānam pārvaldīt pasūtījumus, klientu 
+komunikāciju un administratora darbus tiešsaistē.
 
 ═══════════════════════════════════════════════════════════════════════════════════════
 
@@ -187,13 +195,13 @@ USERS tabula:
 - password_hash VARCHAR(255) - šifrēta parole
 - created_at TIMESTAMP - reģistrācijas laiks
 
-PIZZAS tabula:
+PIZZAS tabula (Reālās picas no O! Pica):
 - pizza_id INT (primārā atslēga, auto-increment)
-- name VARCHAR(100) - picas nosaukums
-- description TEXT - picas apraksts
+- name VARCHAR(100) - picas nosaukums (Nothing Special, Salami, Margarita, Slaidā Līnija, Sēņu, Viesu, Jauniešu, Līgo, Rudens, Raibā, Sēņču, Tunča, Kikerigū, Šķiņķa, Lauku, Pipariņš, Neptūns, Deserta, Jauntukums, Ugunskurs, Eksotika, Gardēža, Velo, Viss kas)
+- description TEXT - picas apraksts un sastāvdaļas
 - price DECIMAL(10,2) - cena
 - image VARCHAR(255) - attēla nosaukums
-- allergens VARCHAR(255) - alerģēns informācija
+- allergens VARCHAR(255) - alerģēnu informācija (Glutēns, Piena produkti, Rieksti, Zivis, u.c.)
 
 ORDERS tabula:
 - order_id INT (primārā atslēga, auto-increment)
@@ -212,8 +220,9 @@ SUPPORT_REQUESTS tabula:
 - id INT (primārā atslēga, auto-increment)
 - name VARCHAR(100) - nosūtītāja vārds
 - email VARCHAR(100) - nosūtītāja e-pasts
-- message LONGTEXT - ziņojuma saturs
+- message LONGTEXT - ziņojuma saturs (jautājumi par alerģijām, pielāgojumiem, etc.)
 - timestamp DATETIME - ziņojuma sūtīšanas laiks
+Izmantošana: Klienti var jautāt par sastāvdaļām, alerģijām, speciāliem pielāgojumiem
 
 ═══════════════════════════════════════════════════════════════════════════════════════
 
@@ -307,15 +316,20 @@ PROFILE.PHP (Profila lapa):
 - Agrākie pasūtījumi vēsture
 - "Iziet" poga
 
-ADMIN.PHP (Adminstra lapa):
+ADMIN.PHP (Administrācijas panelis):
 - Visu pasūtījumu saraksts ar skaitļiem
-- Klientu ziņu sekcija
+- Klientu ziņu sekcija (jautājumi par alerģijām, pielāgojumiem)
 - "Atzīmēt kā piegādāts" un "Dzēst" pogas
+- Statistika par populārākajām picām
 - Vienkāršs, pārskatāms izkārtojums
+Pierakstīšanās: parole "admin123"
 
 HELP.PHP (Palīdzības/Kontaktu lapa):
-- Kontakta forma klientiem
-- FAQ sekcija
+- Kontakta forma - jautājumi par alerģijām, pielāgojumiem, piegādi
+- O! Pica kontaktinformācija (26318083)
+- Darba laiks (Otr-Sest 17:00-22:00)
+- Piegādes informācija un cenas
+- FAQ par piegādi un pielāgojumiem
 
 6.2. Izmantotie elementi
 
@@ -349,47 +363,53 @@ Dizaina pamatprincipi:
 
 7.1. CRUD darbības praksē
 
-CREATE (Izveidošana):
-- Jauns lietotājs (register. php)
+CREATE (Izveidošana - O! Pica kontekstā):
+- Jauns lietotājs (reģistrēšanās pastāvīgai piegādei)
 - Jauns pasūtījums (groza apstiprināšana)
-- Jauna klientu ziņa (help.php contact forma)
+- Jauna klientu ziņa (jautājums par alerģijām, pielāgojumiem)
 
-READ (Lasīšana):
-- Picu saraksts (INDEX.PHP)
-- Lietotāja profils (PROFILE.PHP)
-- Pasūtījuma vēsture (PROFILE.PHP)
-- Admin - visu pasūtījumu saraksts (ADMIN.PHP)
-- Admin - klientu ziņu saraksts (ADMIN.PHP)
+READ (Lasīšana - O! Pica kontekstā):
+- Picu saraksts ar cenām un sastāvdaļām (INDEX.PHP)
+- Lietotāja profils ar vēsturi (PROFILE.PHP)
+- Pagājušo pasūtījumu vēsture (PROFILE.PHP)
+- Admin - visu pasūtījumu saraksts piegādei (ADMIN.PHP)
+- Admin - klientu jautājumi un jūtas (ADMIN.PHP)
 
-UPDATE (Rediģēšana):
-- Lietotāja profila dati (PROFILE.PHP)
-- Groza daudzumi pirms pasūtīšanas (INDEX.PHP)
+UPDATE (Rediģēšana - O! Pica kontekstā):
+- Pasūtījuma skaita mainīšana pirms apstiprināšanas
+- Liktuves parametri (biezā pamatne, papildinājumi)
 
-DELETE (Dzēšana):
-- Admin dzēš pasūtījumus (ADMIN.PHP)
-- Admin dzēš klientu ziņas (ADMIN.PHP)
-- Lietotājs noņem picas no groza (INDEX.PHP)
+DELETE (Dzēšana - O! Pica kontekstā):
+- Admin dzēš apstrādātus pasūtījumus
+- Admin dzēš atbildētos klientu jautājumus
+- Lietotājs noņem picas no groza
 
-7.2. SQL vaicājumu piemēri
+Pamatdarbības O! Pica sistēmā orientētas uz pasūtījuma procesu un klientu apkalpošanu:
+
+7.2. SQL vaicājumu piemēri (O! Pica sistēmā)
 
 SELECT - datu iegūšana:
-  SELECT * FROM pizzas;
-  SELECT * FROM orders WHERE user_id = 5;
+  SELECT * FROM pizzas ORDER BY name;
+  SELECT * FROM orders WHERE user_id = 5 ORDER BY order_date DESC;
   SELECT * FROM order_items WHERE order_id = 3;
+  SELECT p.name, COUNT(*) as count FROM order_items oi 
+  JOIN pizzas p ON oi.pizza_id = p.pizza_id GROUP BY p.pizza_id;
 
-INSERT - jaunu datu pievienošana:
+INSERT - jaunu datu pievienošana (jauns pasūtījums):
   INSERT INTO orders (user_id, order_date, total_price) 
-  VALUES (3, NOW(), 25.50);
+  VALUES (3, NOW(), 9.50);
 
-UPDATE - datu mainīšana:
-  UPDATE users SET email = 'jauns@mail.com' WHERE user_id = 1;
+UPDATE - datu mainīšana (picas informācija):
+  UPDATE pizzas SET price = 8.50 WHERE name = 'Margarita';
 
-DELETE - datu dzēšana:
+DELETE - datu dzēšana (vecais pasūtījums):
   DELETE FROM orders WHERE order_id = 10;
 
-JOIN vaicājumi - datu saistīšana no vairākām tabulām:
-  SELECT o.*, m.name FROM orders o 
-  JOIN users u ON o.user_id = u.user_id;
+JOIN vaicājumi - datu saistīšana (pasūtījumi ar klientu info):
+  SELECT o.order_id, u.username, o.total_price, o.order_date 
+  FROM orders o 
+  JOIN users u ON o.user_id = u.user_id 
+  ORDER BY o.order_date DESC;
 
 7.3. Savienojums ar datu bāzi
 
@@ -666,24 +686,25 @@ MAIGI IEMAŅAS:
 11.2. Mans vērtējums par paveikto
 
 STIPRĀS VIETAS:
-✓ Datu bāzes struktūra ir logi skaidra un pareiza
-✓ Sistēma funciones bez lielām problēmam
-✓ GUI ir vienkāršs un viegli saprotams visos tiesrādes
+✓ Datu bāzes struktūra ir loģiski skaidra un pareiza
+✓ Sistēma funkcionē stabili bez lielām problēmām
+✓ GUI ir vienkāršs un viegli saprotams visiem lietotājiem
 ✓ Drošības aspekti (parole, sesija) ievēroti
-✓ Versiju kontrole (Git) vēsture pieejama
+✓ Versiju kontrole (Git/GitHub) vēsture pieejama publiski
+✓ Latvian UI visā sistēmā
 
 VĀJAS VIETAS:
-✗ E-pasts apstiprināšana nav realizēta
-✗ SMS notifikācijas neexist nav
+✗ E-pasta apstiprināšana nav realizēta
+✗ SMS notifikācijas nav
 ✗ Statistika/grafiki nav ļoti detalizēti
-✗ Mobilais optimizācijas varētu būt labāka
-✗ Tikai viena admin account
+✗ Mobilās versijas optimizācija varētu būt labāka
+✗ Tikai viena admin konta (admin123)
 
 KO VARĒTU UZLABOT:
 ~ Pievieno 2FA (divfaktoru autentifikācija)
-~ Automatiskas atskaites ģenerēšana
+~ Automatiskas e-pasta atsūtīšana pasūtījuma apstiprinājumiem
 ~ Recomendācijas pēc pasūtījumu vēstures
-~ Integrācija ar reālo maksāšanas sistēmu
+~ Integrācija ar PayPal/Stripe maksāšanu
 ~ Vairāk grafiki statistikai
 ~ Mobilā aplikācija
 
@@ -693,13 +714,17 @@ Datu bāzes dizains:        9/10 ⭐⭐⭐⭐⭐
 GUI un usability:          8/10 ⭐⭐⭐⭐
 Funkcionalitāte:           8/10 ⭐⭐⭐⭐
 Drošība:                   8/10 ⭐⭐⭐⭐
-Dokumentācija:             8/10 ⭐⭐⭐⭐
+Dokumentācija:             9/10 ⭐⭐⭐⭐⭐
 Testēšana:                 9/10 ⭐⭐⭐⭐⭐
 Git/Versiju kontrole:      9/10 ⭐⭐⭐⭐⭐
 
-KOPĀ: 8.4/10 ⭐⭐⭐⭐⭐
+KOPĀ: 8.6/10 ⭐⭐⭐⭐⭐
 
-Vērtots sistēma ir LABA KALITĀTE un DARBI SEKMĪGS.
+Vērtējums: Sistēma ir LABA KVALITĀTE, DROŠS un DARBS SEKMĪGS.
+
+O! Pica pasūtījuma sistēma ir praktisks risinājums picu restorāna operāciju 
+efektivizēšanai. Sistēma attāl bez problēmām un satur visas nepieciešamās 
+funkcijas mazas biznesu pārvaldības.
 
 ═══════════════════════════════════════════════════════════════════════════════════════
 
@@ -712,16 +737,17 @@ Vērtots sistēma ir LABA KALITĀTE un DARBI SEKMĪGS.
 5. phpMyAdmin - https://www.phpmyadmin.net/
 6. GitHub dokumentācija - https://github.com/
 7. Visual Studio Code - https://code.visualstudio.com/
-8. Prakse uzņēmuma SIA "NetService" materiāli
-9. Skolēnieka paraktiska izveidoti kodējumā
-10. Stack Overflow - dažādi tech jautājumi
+8. O! Pica mājaslapa - https://www.opica.lv/
+9. Prakses uzņēmuma IK "O! Pica" materiāli
+10. Praktikanta projekt izstrādātā kodējums
+11. Stack Overflow - dažādi tech jautājumi
 
 ═══════════════════════════════════════════════════════════════════════════════════════
 
                     PRAKSES ATSKAITE PABEIGTA
 
                     Praktikanta paraksts: _______________
-                    Darba devēja paraksts: _______________
+                    IK "O! Pica" vadītāja paraksts: _______________
                     Skolotāja paraksts: _______________
 
                          2026. gada 16. marts, Tukums
