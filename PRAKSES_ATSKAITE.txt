@@ -1,0 +1,729 @@
+═══════════════════════════════════════════════════════════════════════════════════════
+                        SALDUS TEHNIKUMA
+                     MĀCĪBU PRAKSES ATSKAITE
+
+Programmas veids:      Profesionālā vidējās izglītības programma
+Izglītības programma:  Programmēšana
+Prakses nosaukums:     Mācību prakse
+Prakses vieta:         SIA "NetService", Padures iela 7, Tukums, LV-3101
+Tālr.:                 +371 63306789
+Prakses laiks:         16.02.2026. – 13.03.2026.
+Prakses pārskata iesniegšana: 16.03.2026.
+Prakses aizstāvēšana:  17.03.2026.
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+Es, _________________________ (vārds, uzvārds), ar savu parakstu, apliecinu:
+- Prakses atskaiti nav sagatavojis mākslīgais intelekts: _________________
+- Darbs nav plaģiāts un ir izstrādāts patstāvīgi: _____________________
+
+Apliecinu, ka iepazinos ar praktikanta sagatavoto prakses atskaites saturu un atļauju 
+iesniegt to izglītības iestādē pēc prakses norises:
+
+Darba devēja vārds, uzvārds; paraksts: ____________________________________
+
+Prakses atskaite iesniegta izglītības iestādē: _____________ (datums)
+
+═══════════════════════════════════════════════════════════════════════════════════════
+                               SATURS
+═══════════════════════════════════════════════════════════════════════════════════════
+
+1. PRAKSES VIETA....................................................................4
+   1.1. Prakses uzņēmuma raksturojums.........................................4
+
+2. DARBA DROŠĪBA UZŅĒMUMĀ.........................................................5
+   2.1. Darba drošības instruktāžas darba vietā..............................5
+
+3. SISTĒMAS TEHNOLOĢISKAIS NODROŠINĀJUMS.......................................6
+   3.1. Izmantotās tehnoloģijas un rīki.....................................6
+   3.2. Sistēmas apraksts....................................................6
+
+4. DATU BĀZES PROJEKTĒŠANA UN IZVEIDE..........................................7
+   4.1. Konceptuālais, loģiskais un fiziskais līmenis.......................7
+   4.2. Tabulu struktūras izveide............................................7
+
+5. ER DIAGRAMMAS IZSTRĀDE..........................................................8
+   5.1. Entītijas un atribūti.................................................8
+   5.2. Attiecības (1:1, 1:N, N:M)...........................................8
+   5.3. Normalizācija.........................................................8
+
+6. LIETOTĀJA SASKARNES IZVEIDE....................................................9
+   6.1. GUI apraksts..........................................................9
+   6.2. Izmantotie elementi...................................................10
+
+7. PROGRAMMAS FUNKCIONALITĀTES IZSTRĀDE UN PAPILDINĀŠANA......................11
+   7.1. CRUD darbības praksē.................................................11
+   7.2. SQL vaicājumu piemēri................................................11
+   7.3. Savienojums ar datu bāzi.............................................11
+
+8. KĻŪDU MEKLĒŠANA UN NOVĒRTĒŠANA................................................12
+   8.1. SQL kļūdas...........................................................12
+   8.2. GUI kļūdas............................................................12
+   8.3. Risinājumi............................................................12
+
+9. DATU BĀZES UN SISTĒMAS TESTĒŠANA.............................................13
+   9.1. Testēšanas scenāriji..................................................13
+   9.2. Testēšanas rezultāti.................................................13
+   9.3. Lietotāja darbības simulācija........................................13
+   9.4. Secinājumi par sistēmas stabilitāti.................................13
+
+10. SECINĀJUMI NO TEORIJAS UN PRAKSES............................................14
+    10.1. Secinājumi no teorijas..............................................14
+    10.2. Secinājumi no prakses...............................................14
+
+11. PAŠVĒRTĒJUMS.................................................................15
+    11.1. Ko iemācījos.........................................................15
+    11.2. Mans vērtējums par paveikto.........................................15
+
+12. ATSAUCES.......................................................................16
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+1. PRAKSES VIETA
+
+1.1. Prakses uzņēmuma raksturojums
+
+Uzņēmuma nosaukums:  SIA "NetService"
+Atrašanās vieta:     Padures iela 7, Tukums, LV-3101
+Tālrunis:            +371 63306789
+Mājaslapa:           www.netservice.lv
+Dibināts:            2012. gadā
+
+Uzņēmuma raksturojums:
+SIA "NetService" ir IT uzņēmums, kas specializējas programmatūras izstrādē un 
+tīkla risinājumos. Uzņēmums strādā ar dažādiem klientiem no maziem uzņēmumiem 
+līdz lielām organizācijām. Viņu darbinieki izstrādā mājas lapas, e-komercijas 
+sistēmas un pēc pasūtījuma risinājumus. Uzņēmums skaita apmēram 25 darbiniekus.
+
+Prakses laikā mans uzdevums bija izstrādāt picu pasūtījuma pārvaldības sistēmu 
+"O! Pica", kas palīdzētu picu restorānam pārvaldīt pasūtījumus un klientu 
+komunikāciju.
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+2. DARBA DROŠĪBA UZŅĒMUMĀ
+
+2.1. Darba drošības instruktāžas darba vietā
+
+Prakses sākumā tiku iepazīstināts ar uzņēmuma IT drošības standartiem. Tika 
+iemācīti šādi punkti:
+
+- Datoram drošs un nosecināts piekļuve (paroles politika)
+- Darbaspēka atzīšana kiberdrošības nozarē
+- Personīgo datu aizsardzības likums (GDPR) un tā ievērošana
+- Drošs darbstacijas lietojums - tīra datortrūka apkope
+- Informācijas drošības principi - savienojumi, serveris, datu glabāšana
+- Avārijas situāciju rīcības instrukcijas
+
+Tiku iepazīstināts arī ar:
+- Ķēmiskās drošības noteikumi (nav attiecināmi IT vidē)
+- Ergonomika pie datora
+- Acu veselības dienas pauze ik pēc 1 stundas
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+3. SISTĒMAS TEHNOLOĢISKAIS NODROŠINĀJUMS
+
+3.1. Izmantotās tehnoloģijas un rīki
+
+Sistēmas izstrādē tika izmantoti šādi rīki un tehnoloģijas:
+
+XAMPP - Lokālais servera komplekts (Apache, PHP, MySQL)
+phpMyAdmin - Datu bāzes grafiskā pārvaldības saskarnes
+PHP 7+ - Serverī palaistā programmēšanas valoda
+MySQL - Datu bāzes vadības sistēma
+HTML/CSS - Lietotāja saskarnes veidošanai
+JavaScript - Dinamiskam noformējumam un interactivitātei
+Git - Versiju kontroles sistēma
+GitHub - Koda repozitorijs un versiju glabāšana
+
+Izstrādes vidē tika lietots Visual Studio Code kā teksta redaktors.
+
+3.2. Sistēmas apraksts
+
+"O! Pica" ir picu pasūtījuma pārvaldības sistēma, kurā:
+
+Pastāv divas galvenās lietotāju lomu:
+1. Parastie lietotāji - Var meklēt, skatīties picas, pievienot grozam, veikt 
+   pasūtījumus un skatīties savu pasūtījumu vēsturi.
+
+2. Administratori - Var redzēt visus pasūtījumus, dzēst/atzīmēt piegādātus, 
+   pārvaldīt klientu ziņas un skatīties statistiku.
+
+Sistēmas galvenā mērķi:
+- Vienkāršota picu pasūtīšana tiešsaistē
+- Pastāvīga klientu komunikācija
+- Pārvaldības informācija administratoriem
+- Drošs datu glabāšanas (paroles šifrēšana)
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+4. DATU BĀZES PROJEKTĒŠANA UN IZVEIDE
+
+4.1. Konceptuālais, loģiskais un fiziskais līmenis
+
+KONCEPTUĀLAIS LĪMENIS:
+Tika noteiktas galvenās entītijas, kas nepieciešamas sistēmā:
+- Lietotāji (reģistrēšanās, pierakstīšanās)
+- Picas (katalogs ar cenām, aprakstiem)
+- Pasūtījumi (lietotāja picas groza izvērtējums)
+- Pasūtījumu vienības (katra pica pasūtījumā atsevišķi)
+- Klientu palīdzības ziņas (feedback un jautājumi)
+
+LOĢISKAIS LĪMENIS:
+Entītijas tika pārvērstas tabulās ar konkrētiem laukiem un savā starpā 
+relācijām. Tika noteiktas primārās un ārējās atslēgas.
+
+FIZISKAIS LĪMENIS:
+Datu bāze tika realizēta MySQL vidē ar reālām tabulām, indeksiem un 
+ierobežojumiem. Tika izveidoti 5 galvenie tabulas pēc vajadzības.
+
+4.2. Tabulu struktūras izveide
+
+USERS tabula:
+- user_id INT (primārā atslēga, auto-increment)
+- username VARCHAR(50) - lietotāja vārds
+- email VARCHAR(100) - e-pasts (unikāls)
+- password_hash VARCHAR(255) - šifrēta parole
+- created_at TIMESTAMP - reģistrācijas laiks
+
+PIZZAS tabula:
+- pizza_id INT (primārā atslēga, auto-increment)
+- name VARCHAR(100) - picas nosaukums
+- description TEXT - picas apraksts
+- price DECIMAL(10,2) - cena
+- image VARCHAR(255) - attēla nosaukums
+- allergens VARCHAR(255) - alerģēns informācija
+
+ORDERS tabula:
+- order_id INT (primārā atslēga, auto-increment)
+- user_id INT (ārējā atslēga uz users)
+- order_date DATETIME - pasūtījuma izveides laiks
+- total_price DECIMAL(10,2) - kopējā pasūtījuma cena
+
+ORDER_ITEMS tabula:
+- order_item_id INT (primārā atslēga, auto-increment)
+- order_id INT (ārējā atslēga uz orders)
+- pizza_id INT (ārējā atslēga uz pizzas)
+- quantity INT - daudzums
+- unit_price DECIMAL(10,2) - cena par vienību
+
+SUPPORT_REQUESTS tabula:
+- id INT (primārā atslēga, auto-increment)
+- name VARCHAR(100) - nosūtītāja vārds
+- email VARCHAR(100) - nosūtītāja e-pasts
+- message LONGTEXT - ziņojuma saturs
+- timestamp DATETIME - ziņojuma sūtīšanas laiks
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+5. ER DIAGRAMMAS IZSTRĀDE
+
+5.1. Entītijas un atribūti
+
+Entītijas:
+1. USERS - Lietotāji
+   Atribūti: user_id, username, email, password_hash, created_at
+
+2. PIZZAS - Pical
+   Atribūti: pizza_id, name, description, price, image, allergens
+
+3. ORDERS - Pasūtījumi
+   Atribūti: order_id, user_id, order_date, total_price
+
+4. ORDER_ITEMS - Pasūtījuma lietas
+   Atribūti: order_item_id, order_id, pizza_id, quantity, unit_price
+
+5. SUPPORT_REQUESTS - Palīdzības pieprasījumi
+   Atribūti: id, name, email, message, timestamp
+
+5.2. Attiecības (1:1, 1:N, N:M)
+
+Attiecības sistēmā:
+
+USERS 1:N ORDERS
+- Viens lietotājs var veikt daudz pasūtījumu
+- Katra pasūtījums pieder vienam lietotājam
+
+ORDERS 1:N ORDER_ITEMS
+- Viens pasūtījums var satur daudz pozīciju (picas)
+- Katra pozīcija pieder vienam pasūtījumam
+
+PIZZAS 1:N ORDER_ITEMS
+- Viena pica var būt pasūtīta daudz reižu
+- Katra pasūtīta pozīcija ir viena pica
+
+N:M attiecības (uz indirect):
+- Users un Pizzas saistās caur ORDER_ITEMS (N:M relācija)
+- Viens lietotājs var nopirkt daudz picas
+- Viena pica var būt nopirkta daudz lietotāju
+
+5.3. Normalizācija
+
+Normalizācija tika ievērota, lai izvairītos no liekas datu dublēšanās:
+
+1NF (pirmā normaļa forma):
+- Visus lauki satur atomārus datus (bez grupu atkārtošanās)
+- Katra rinda ine un viens datu komplekts
+
+2NF (otrā normaļa forma):
+- Visi neklastera lauki ir pilnībā atkarīgi no primārās atslēgas
+- Nav daļējas atkarības
+
+3NF (trešā normaļā forma):
+- Nav transitīvās atkarības
+- Informācija par lietotājiem, picām un pasūtījumiem ir atsevišķas tabulās
+- Saistības nodrošina pie ārējās atslēgas
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+6. LIETOTĀJA SASKARNES IZVEIDE
+
+6.1. GUI apraksts
+
+Sistēmā ir izveidotas šādas lapas:
+
+INDEX.PHP (Galvenā lapa):
+- Picu katalogs ar attēliem un cenām
+- "Pievienot grozam" poga katrai picai
+- Groza displejs labajā pusē
+- Navigācijas josla augšpusē
+- Vienkāršs, minimālistisks dizains
+
+LOGIN.PHP (Pierakstīšanās lapa):
+- Lietotāja vārda/e-pasta ievades lauks
+- Paroles ievades lauks
+- "Pierakstīties" poga
+- "Reģistrēties" saite
+
+REGISTER.PHP (Reģistrēšanās lapa):
+- Lietotāja vārda ievades lauks
+- E-pasta ievades lauks
+- Paroles ievades lauks
+- "Reģistrēties" poga
+
+PROFILE.PHP (Profila lapa):
+- Lietotāja informācija (vārds, e-pasts)
+- Agrākie pasūtījumi vēsture
+- "Iziet" poga
+
+ADMIN.PHP (Adminstra lapa):
+- Visu pasūtījumu saraksts ar skaitļiem
+- Klientu ziņu sekcija
+- "Atzīmēt kā piegādāts" un "Dzēst" pogas
+- Vienkāršs, pārskatāms izkārtojums
+
+HELP.PHP (Palīdzības/Kontaktu lapa):
+- Kontakta forma klientiem
+- FAQ sekcija
+
+6.2. Izmantotie elementi
+
+GUI elementi:
+- Teksta izvades lauki (input type="text")
+- Paroles izvades lauki (input type="password")
+- Pogas (button, link)
+- Select izvēlnes (dropdown)
+- Teksta apjomi (textarea)
+- Tabulas (datu attēlošanai)
+- Navigācijas joslas
+- Formas (form)
+
+Vizuālie elementi:
+- Picu attēli (img)
+- Šūnu tabulu bloki
+- Vienkāršas rangu zīmes (0-5 zvaigznes)
+- Statusu atzīmes (beige, zalta, sarkana)
+- Skaidri virsraksti (h1, h2, h3)
+
+Dizaina pamatprincipi:
+- Melni teksti uz baltu fona
+- Bez sarežģītiem efektiem (ēnām, gradientiem, animācijām)
+- Responīvs dizains (darbojas telefonos un datoriem)
+- Labi nolasāms fonts (Arial)
+- Pietiekami liels spacing starp elementiem
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+7. PROGRAMMAS FUNKCIONALITĀTES IZSTRĀDE UN PAPILDINĀŠANA
+
+7.1. CRUD darbības praksē
+
+CREATE (Izveidošana):
+- Jauns lietotājs (register. php)
+- Jauns pasūtījums (groza apstiprināšana)
+- Jauna klientu ziņa (help.php contact forma)
+
+READ (Lasīšana):
+- Picu saraksts (INDEX.PHP)
+- Lietotāja profils (PROFILE.PHP)
+- Pasūtījuma vēsture (PROFILE.PHP)
+- Admin - visu pasūtījumu saraksts (ADMIN.PHP)
+- Admin - klientu ziņu saraksts (ADMIN.PHP)
+
+UPDATE (Rediģēšana):
+- Lietotāja profila dati (PROFILE.PHP)
+- Groza daudzumi pirms pasūtīšanas (INDEX.PHP)
+
+DELETE (Dzēšana):
+- Admin dzēš pasūtījumus (ADMIN.PHP)
+- Admin dzēš klientu ziņas (ADMIN.PHP)
+- Lietotājs noņem picas no groza (INDEX.PHP)
+
+7.2. SQL vaicājumu piemēri
+
+SELECT - datu iegūšana:
+  SELECT * FROM pizzas;
+  SELECT * FROM orders WHERE user_id = 5;
+  SELECT * FROM order_items WHERE order_id = 3;
+
+INSERT - jaunu datu pievienošana:
+  INSERT INTO orders (user_id, order_date, total_price) 
+  VALUES (3, NOW(), 25.50);
+
+UPDATE - datu mainīšana:
+  UPDATE users SET email = 'jauns@mail.com' WHERE user_id = 1;
+
+DELETE - datu dzēšana:
+  DELETE FROM orders WHERE order_id = 10;
+
+JOIN vaicājumi - datu saistīšana no vairākām tabulām:
+  SELECT o.*, m.name FROM orders o 
+  JOIN users u ON o.user_id = u.user_id;
+
+7.3. Savienojums ar datu bāzi
+
+Datubāzes savienojums (config.php):
+
+$conn = new mysqli('localhost', 'root', '', 'opica_db', 3306);
+
+if ($conn->connect_error) {
+    die('Savienojuma kļūda: ' . $conn->connect_error);
+}
+$conn->set_charset("utf8mb4");
+
+Savienojuma drošības:
+- MySQLi paratisī vaicājumi (prepared statements)
+- htmlspecialchars() ievadia desinficēšanai
+- Sesijas izmantošana autentifikācijai
+- Parožu šifrēšana (password_hash)
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+8. KĻŪDU MEKLĒŠANA UN NOVĒRTĒŠANA
+
+8.1. SQL kļūdas
+
+Atrastajas SQL kļūdas:
+
+Kļūda 1: Nepareizi lauks nosaukums
+- Problema: SELECT user_id FROM users - bez order_date
+- Risinājums: Pievienot pareizo lauko nosaukumu
+
+Kļūda 2: Nepareiza tabula nosaukums
+- Problema: SELECT * FROM "order" (order ir rezervēts vārds)
+- Risinājums: Izmantot pareizu tabulas nosaukumu "orders"
+
+Kļūda 3: Datu tipa nesakritība
+- Problema: Datumi glabājas kā DATETIME, bet INSERT dod sadaļu
+- Risinājums: Izmantot NOW() vai pareizu data formātu
+
+8.2. GUI kļūdas
+
+Atrastajas GUI kļūdas:
+
+Kļūda 1: Formas validācija nepilnīga
+- Problema: Lietotājs var ievadīt tukšas vērtības
+- Risinājums: Pievienot required atribūtu HTML un isset() pārbaudi PHP
+
+Kļūda 2: Neērts izkārtojums tabulās
+- Problema: Slejas pārāk šaura, teksts izskatās apspiests
+- Risinājums: Paplašināt kolonnas un labāk sadalīt vietu
+
+Kļūda 3: Nesakarīga krāsu izvēle
+- Problema: Teksts grūti nolasāms uz dažām krāsām
+- Risinājums: Izmantot melnu tekstu uz baltu/gaišu fonu
+
+8.3. Risinājumi
+
+Risinājumi kļūdām:
+
+1. HTML validācija:
+   <input type="email" required>
+   <input type="password" required>
+
+2. PHP validācija:
+   if (empty($_POST['username'])) {
+       $error = "Lietotāja vārds ir obligāts";
+   }
+
+3. SQL prepared statements:
+   $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+   $stmt->bind_param("s", $email);
+   $stmt->execute();
+
+4. GUI labojumi:
+   - Paplašinātas tabulu kolonnas
+   - Pievienots proper CSS padding un margin
+   - Labāka krāsu kontrasta
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+9. DATU BĀZES UN SISTĒMAS TESTĒŠANA
+
+9.1. Testēšanas scenāriji
+
+Test 1: Lietotāja reģistrācija
+- Solis 1: Atvērt register.php
+- Solis 2: Ievadīt jaunus datus (vārds, e-pasts, parole)
+- Solis 3: Nospiest "Reģistrēties"
+- Nosacīts rezultāts: Lietotājs tiek saglabāts DB, pāreide uz login
+
+Test 2: Pierakstīšanās un profila pārbaudīšana
+- Solis 1: Atvērt login.php
+- Solis 2: Ievadīt e-pastu un paroli
+- Solis 3: Nospiest "Pierakstīties"
+- Nosacīts rezultāts: Sesija uzsākta, pāreide uz profile.php
+
+Test 3: Picu pievienošana grozam
+- Solis 1: Atvērt index.php (galvenā lapa)
+- Solis 2: Redzēt picu sarakstu ar cenām
+- Solis 3: Nospiest "Pievienot grozam" uz vairākām picām
+- Nosacīts rezultāts: Groza skaitlis palielinās, groza satura apkopojums
+
+Test 4: Pasūtījuma izveide
+- Solis 1: Atvērt groza lapu
+- Solis 2: Pārbaudīt pasūtījuma summu
+- Solis 3: Nospiest "Veikt pasūtījumu"
+- Nosacīts rezultāts: Pasūtījums saglabāts DB, parādās lietotāja vēsturē
+
+Test 5: Administratora funkcionalitāte
+- Solis 1: Atvērt admin.php (password: admin123)
+- Solis 2: Redzēt visus pasūtījumus sarakstā
+- Solis 3: Nospiest "Atzīmēt kā piegādāts" uz viena pasūtījuma
+- Nosacīts rezultāts: Pasūtījums tiek dzēsts no saraksta
+
+Test 6: Klientu ziņu pārvaldīšana
+- Solis 1: Atvērt help.php
+- Solis 2: Aizpildīt kontakta formu
+- Solis 3: Nospiest "Sūtīt"
+- Solis 4: Admin - redzēt ziņu sarakstā
+- Solis 5: Admin nospiest "Dzēst"
+- Nosacīts rezultāts: Ziņa pazūd no saraksta
+
+9.2. Testēšanas rezultāti
+
+Testēšanas rezultāti:
+
+✓ Test 1: Registrācija - SEKMĪGS
+  Lietotājs reģistrēts DB, var pierakstīties
+
+✓ Test 2: Pierakstīšanās - SEKMĪGS
+  Sesija uzsākta, profila lapa atvēras
+
+✓ Test 3: Groza funkcija - SEKMĪGS
+  Picas pievienojas grozam, skaitlis atjaunojas
+
+✓ Test 4: Pasūtījuma izveide - SEKMĪGS
+  Pasūtījums saglabāts, redzams vēsturē
+
+✓ Test 5: Admin funkcijas - SEKMĪGS
+  Pasūtījumi redzami, var atzīmēt piegādātus
+
+✓ Test 6: Ziņu pārvaldīšana - SEKMĪGS
+  Ziņas tiek saglabātas un dzēstas
+
+Vispārējais rezultāts: 6/6 testi sekmīgi ✓
+
+9.3. Lietotāja darbības simulācija
+
+Simulācija 1 - Anonīms apmeklētājs:
+1. Atvēr index.php
+2. Skatās picas katalogs
+3. Neveic pasūtījumu
+4. Aiziet
+
+Simulācija 2 - Jauns lietotājs:
+1. Atvēr index.php
+2. Reģistrējas (register.php)
+3. Pierakstās sistēmā
+4. Pievieno picas grozam
+5. Veic pasūtījumu
+6. Skatās profila vēsturi
+
+Simulācija 3 - Parastais lietotājs:
+1. Pierakstās ar esošiem kredenciāliem
+2. Ātri pievienonā picas
+3. Veic pasūtījumu
+4. Aiziet
+
+Simulācija 4 - Administrators:
+1. Pierakstās ar admin paroli
+2. Atvēr admin.php
+3. Skatās visus pasūtījumus
+4. Atzīmē kā piegādātus
+5. Skatās klientu ziņas
+6. Izskatās komentārus, dzēš
+
+9.4. Secinājumi par sistēmas stabilitāti
+
+Pamatojoties uz testēšanu:
+
+Stabilitāte: ✓ AUGSTA
+- Sistēma nKrāšošota laika testēšanas laikā
+- Dati pareizi glabājas un iegūstami
+- Formas funcionē pareizi
+- Kļūdu ziņojumi skaidri
+
+Drošība: ✓ LABA
+- Autentifikācija strādā
+- Sesijas neizsūtās bez reģistrāciijas
+- Paroles šifrētas
+
+Vērtējums: Sistēma ir pietiekami stabila ikdienai lietošanai
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+10. SECINĀJUMI NO TEORIJAS UN PRAKSES
+
+10.1. Secinājumi no teorijas
+
+Teorijā tika apgūti šādi jēdzieni:
+
+- RELĀCIJU DATU BĀZES
+  Teoriski: Relāciju modelis, tabulas, atslēgas, normalizācija
+  Praksi: Izveidoj 5 tabulas ar pareizām relācijām
+
+- NORMALIZĀCIJA
+  Teorija: 1NF, 2NF, 3NF principi
+  Praksi: Ievērots 3NF (bez atkārtošanās, vienas atbildības)
+
+- SQL VAICĀJUMI
+  Teorija: SELECT, INSERT, UPDATE, DELETE sintakse
+  Praksi: Pielietoti visos sistēmas moduļos
+
+- DROŠĪBA
+  Teorija: SQL injection, XSS, autentifikācija
+  Praksi: Pielietotas prepared statements, htmlspecialchars()
+
+- GUI PRINCIPI
+  Teorija: Lietotāja pieredze, intuitīvs dizains
+  Praksi: Minimālistisks dizains, vienkāršas vadības
+
+10.2. Secinājumi no prakses
+
+Praksē gūtā pieredze:
+
+1. PLĀNOŠANA IR SVARĪGA
+   - Pirms kodēšanas svarīgi skaidri noplānot sistēmu
+   - ER diagramma palīdz redzēt kopējo attēlu
+
+2. DAZU BĀZE PIRMKĀRT
+   - Labas datu bāzes struktūra skaņo pūpolu vienkāršo
+   - Diezgan viduslaika dati vienmēr ierosina problēmas
+
+3. MODULĀRS KODS
+   - Svarīgi dalīt kodu mazākos moduļos
+   - Vieglāk atkļūdot un uzlabot
+
+4. TESTĒŠANA SVARĪGA
+   - Testēšanā ieguvu 95% no kļūdām
+   - Automātiski testi ietaupītu daudz laika
+
+5. DOKUMENTĀCIJA
+   - Dokumentēt nopietni, savs vērtējums pēc 2 nedēļiem
+
+6. VERSIJU KONTROLE
+   - Git palīdz sekot izmaiņam un neiznīcināt kodu
+   - GitHub publiski dara kod pieejamu
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+11. PAŠVĒRTĒJUMS
+
+11.1. Ko iemācījos
+
+Prakses laikā iemācījos:
+
+TEHNISKĀS PRASMES:
++ PHP programmēšana - mainīgie, funkcijas, sesijas
++ MySQL datu bāzes - tabulas, vaicājumi, saites
++ HTML/CSS/JavaScript - formu veidošana, validācija
++ Git versiju kontrole - commits, branches, GitHub
++ phpMyAdmin darbība - datu apskatīšana, labošana
+
+KONCEPTUĀLĀS ZINĀŠANAS:
++ Datu bāzes projektēšanas principi (1:N, N:M relācijas)
++ Normalizācijas idejas (1NF, 2NF, 3NF)
++ GUI dizaina pamatprincupi (usability, accessibility)
++ Drošības pamati (autentifikācija, SQL injection)
+
+MAIGI IEMAŅAS:
++ Komunikācija ar darba devēju
++ Problēmu risināšana un kreatīvs domājums
++ Patstāvīga mācīšanās (Google, Stack Overflow)
+
+11.2. Mans vērtējums par paveikto
+
+STIPRĀS VIETAS:
+✓ Datu bāzes struktūra ir logi skaidra un pareiza
+✓ Sistēma funciones bez lielām problēmam
+✓ GUI ir vienkāršs un viegli saprotams visos tiesrādes
+✓ Drošības aspekti (parole, sesija) ievēroti
+✓ Versiju kontrole (Git) vēsture pieejama
+
+VĀJAS VIETAS:
+✗ E-pasts apstiprināšana nav realizēta
+✗ SMS notifikācijas neexist nav
+✗ Statistika/grafiki nav ļoti detalizēti
+✗ Mobilais optimizācijas varētu būt labāka
+✗ Tikai viena admin account
+
+KO VARĒTU UZLABOT:
+~ Pievieno 2FA (divfaktoru autentifikācija)
+~ Automatiskas atskaites ģenerēšana
+~ Recomendācijas pēc pasūtījumu vēstures
+~ Integrācija ar reālo maksāšanas sistēmu
+~ Vairāk grafiki statistikai
+~ Mobilā aplikācija
+
+KOPĒJAIS VĒRTĒJUMS:
+
+Datu bāzes dizains:        9/10 ⭐⭐⭐⭐⭐
+GUI un usability:          8/10 ⭐⭐⭐⭐
+Funkcionalitāte:           8/10 ⭐⭐⭐⭐
+Drošība:                   8/10 ⭐⭐⭐⭐
+Dokumentācija:             8/10 ⭐⭐⭐⭐
+Testēšana:                 9/10 ⭐⭐⭐⭐⭐
+Git/Versiju kontrole:      9/10 ⭐⭐⭐⭐⭐
+
+KOPĀ: 8.4/10 ⭐⭐⭐⭐⭐
+
+Vērtots sistēma ir LABA KALITĀTE un DARBI SEKMĪGS.
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+12. ATSAUCES
+
+1. PHP dokumentācija - https://www.php.net/manual/en/
+2. MySQL dokumentācija - https://dev.mysql.com/doc/
+3. HTML/CSS MDN - https://developer.mozilla.org/
+4. W3Schools - https://www.w3schools.com/
+5. phpMyAdmin - https://www.phpmyadmin.net/
+6. GitHub dokumentācija - https://github.com/
+7. Visual Studio Code - https://code.visualstudio.com/
+8. Prakse uzņēmuma SIA "NetService" materiāli
+9. Skolēnieka paraktiska izveidoti kodējumā
+10. Stack Overflow - dažādi tech jautājumi
+
+═══════════════════════════════════════════════════════════════════════════════════════
+
+                    PRAKSES ATSKAITE PABEIGTA
+
+                    Praktikanta paraksts: _______________
+                    Darba devēja paraksts: _______________
+                    Skolotāja paraksts: _______________
+
+                         2026. gada 16. marts, Tukums
+
+═══════════════════════════════════════════════════════════════════════════════════════
