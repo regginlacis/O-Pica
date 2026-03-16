@@ -1,0 +1,12 @@
+# Git internals
+FETCH_HEAD
+HEAD
+config
+description
+hooks/
+info/
+objects/
+refs/
+
+# Application data
+data/
